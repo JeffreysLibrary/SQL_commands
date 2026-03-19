@@ -1,0 +1,27 @@
+=Join and Export
+.headers on
+.mode csv
+.output join2.csv
+SELECT* FROM table1
+JOIN table2
+ON table1.RSA_ID = table2.Individual_ID__c;
+.output stdout
+
+
+==Output sqlite file
+.headers on
+.mode csv
+.output myfile.csv
+SELECT* FROM tablename;
+.output stdout
+
+
+==ORDER BY filter
+SELECT* FROM (
+SELECT intake_rsa.*,
+ROW_NUMBER() OVER (
+PARTITION BY Fullname
+ORDER BY Program_Year__c DESC
+) AS rn
+FROM intake_rsa)
+WHERE rn=1;
