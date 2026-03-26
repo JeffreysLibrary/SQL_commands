@@ -1,0 +1,43 @@
+SQL for demographics, disability source, gender, hours worked
+
+SELECT AgeAtApplication__c,
+Age_Appl__c,	
+Age__c,	
+American_Indian_Data__c	,
+American_Indian__c,	
+Appl_year__c,	
+Application_Date_Data__c,	
+Application_Date__c,	
+Asian_Data__c,	
+Asian__c,	
+Black_or_African_American_Data__c,
+Black_or_African_American__c,	
+Hispanic_or_Latino_Data__c,	
+Hispanic_or_Latino__c,	
+Individual_ID__c,
+Individual_ID_with_Application_Date__c,
+Native_Hawaiian_Or_Other_Pacific__c,	
+Native_Hawaiian_or_other_pacific_Data__c,
+PrimDisabilityCodeSource__c,	
+PrimDisabilityCodeType__c,
+Primary_Disability_Category__c,	
+Primary_Disability_Source_of_Impairment__c,
+Primary_Disability_Type_of_Impairment__c,
+Program_Quarter__c	, 
+Program_Year__c,
+SecondaryDisabilitySource__c,	
+SecondaryDisabilityType__c,
+Secondary_Disability_Category__c,	
+Secondary_Disability_Source_of_Impairment__c,	
+Secondary_Disability_Type_of_Impairment__c,	
+Sex_Data__c,	
+Sex__c,	
+exitHourlyWage__c,
+exitWeeklyHoursWorkedN__c, 
+ipeWeeklyHoursWorked__c, 
+ipeHourlyWage__c 		
+FROM Constituent_Data__c 
+WHERE 
+    Application_Date__c >= 2018-01-01 
+AND (Individual_ID__c = 'DE0000000' 
+OR Individual_ID__c = 'DE00000001')

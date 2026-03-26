@@ -1,0 +1,23 @@
+delaware_rsa_recent
+
+.import Delaware_PRIME_four_rounds_Feb242026.csv delaware
+.import rsa_demographics_hours.csv rsa
+
+.output rsa_delaware.csv
+SELECT* FROM delaware
+JOIN rsa
+ON delaware.RSA_ID = rsa.Individual_ID__c;
+.output stdout
+
+.import delaware_rsa.csv de_rsa
+
+.output delaware_rsa_recent.csv
+SELECT* FROM (
+SELECT de_rsa.*,
+ROW_NUMBER() OVER (
+PARTITION BY Fullname
+ORDER BY Program_Year__c DESC
+) AS rn
+FROM de_rsa)
+WHERE rn=1;
+.output stdout

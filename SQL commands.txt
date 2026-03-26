@@ -8,7 +8,7 @@ ON table1.RSA_ID = table2.Individual_ID__c;
 .output stdout
 
 
-==Output sqlite file
+==Output csv file
 .headers on
 .mode csv
 .output myfile.csv
@@ -25,3 +25,8 @@ ORDER BY Program_Year__c DESC
 ) AS rn
 FROM intake_rsa)
 WHERE rn=1;
+
+==Create sqlite file
+in powershell:
+sqlite3 mydata.sqlite ".mode csv" ".import myfile.csv mytable"
+
