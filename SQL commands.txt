@@ -15,6 +15,14 @@ ON table1.RSA_ID = table2.Individual_ID__c;
 SELECT* FROM tablename;
 .output stdout
 
+.headers on
+.mode csv
+.output delaware_intake_March30_2026.csv
+SELECT* FROM delaware_recent
+JOIN intake_recent
+ON delaware_recent.Email = intake_recent.RecipientEmail;
+.output stdout
+
 
 ==ORDER BY filter
 SELECT* FROM (

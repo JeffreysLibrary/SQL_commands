@@ -1,0 +1,12 @@
+Salesforce RSA
+RSA ID
+
+Delaware_PRIME_four_rounds (ready for review w identifiers)
+Fullname
+RSA ID
+
+
+Process
+rsa data -> delaware screen --> reduce years --> intake
+rsa to delaware screen with RSA identifier
+RSA+DE Screen to intake with email
