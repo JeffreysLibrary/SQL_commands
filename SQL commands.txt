@@ -38,3 +38,9 @@ WHERE rn=1;
 in powershell:
 sqlite3 mydata.sqlite ".mode csv" ".import myfile.csv mytable"
 
+
+==Tabulate Row Occurrences
+SELECT Secondary_Disability, 
+COUNT(*) AS occurrences 
+FROM DE
+GROUP BY occurrences DESC;
