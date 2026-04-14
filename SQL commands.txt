@@ -7,6 +7,12 @@ JOIN table2
 ON table1.RSA_ID = table2.Individual_ID__c;
 .output stdout
 
+.output delaware_intake_March30_2026.csv
+SELECT* FROM delaware_recent
+JOIN intake_recent
+ON delaware_recent.Email = intake_recent.RecipientEmail;
+.output stdout
+
 
 ==Output csv file
 .headers on
@@ -43,4 +49,62 @@ sqlite3 mydata.sqlite ".mode csv" ".import myfile.csv mytable"
 SELECT Secondary_Disability, 
 COUNT(*) AS occurrences 
 FROM DE
-GROUP BY occurrences DESC;
+GROUP BY Secondary_Disability
+ORDER BY occurrences DESC;
+
+==Tabulate Row Occurrences WHERE
+SELECT Fullname, Black_or_African_American, Primary_Disability,
+COUNT(*) AS times
+FROM DE
+WHERE Black_or_African = 1
+GROUP BY Primary_Disability
+ORDER BY times DESC;
+
+SELECT Primary_Disability_Source_of_Impairment__c,
+COUNT(*) AS times
+FROM new
+WHERE Black_or_African_American_Data__c = 1
+GROUP BY Primary_Disability_Source_of_Impairment__c
+ORDER BY times DESC;
+
+==SELECT MAX()
+SELECT MAX(exitHourlyWage__c)
+FROM DE
+WHERE Black_or_African_American_Data__c = 1 ;
+
+SELECT MAX(exitHourlyWage__c)
+FROM DE
+WHERE Primary_Disability_Source_of_Impairment__c='Autism';
+
+==SELECT MAX() to force integer
+SELECT MAX(CAST(ipeWeeklyHoursWorked__c AS INT))
+FROM new;
+
+==SELECT MAX() to keep decimal
+SELECT MAX(CAST(exitHourlyWage__c AS DECIMAL(18,2)))
+FROM new;
+
+==View multiple factors for one demographic
+.mode box
+SELECT Fullname, exitHourlyWage__c, exitWeeklyHoursWorkedN__c, ipeWeeklyHoursWorked__c, ipeHourlyWage__c
+FROM new
+WHERE Primary_Disability_Source_of_Impairment__c='Depressive and Other Mood Disorders';
+
+.mode box
+SELECT Primary_Disability_Source_of_Impairment__c,
+COUNT(*) AS times
+FROM new
+GROUP BY Primary_Disability_Source_of_Impairment__c
+ORDER BY times DESC;
+
+
+==ORDER BY CAST to force text to numbers
+SELECT CAST(ipeHourlyWage AS INT)
+FROM de
+WHERE ipeHourlyWage > 50 
+ORDER BY CAST (ipeHourlyWage AS DECIMAL) DESC;
+
+==AVERAGE wage for those making a wage
+SELECT AVG(ipeHourlyWage)
+FROM de
+WHERE ipeHourlyWage>0;
