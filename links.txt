@@ -10,3 +10,10 @@ Process
 rsa data -> delaware screen --> reduce years --> intake
 rsa to delaware screen with RSA identifier
 RSA+DE Screen to intake with email
+
+Summary
+RSA [RSA] + DE Screen with identifiers [RSA] - duplicate years + intake [email]
+
+1) attach RSA to RSA
+2) reduce to recent year
+3) attach email to email
