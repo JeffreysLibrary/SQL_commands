@@ -1,0 +1,43 @@
+Steps for stats
+
+Step 1: import rounds and rsa
+ --> both csvs have RSA number
+.headers on
+.import csv
+.import DE_PRIME_total_6_rounds.csv rounds
+.import rsa_May19.csv rsa
+
+Step 2: Link and export rounds to rsa
+.output roundsLINKrsa.csv
+SELECT* FROM rounds
+JOIN rsa
+ON rounds.RSA_ID=rsa.Individual_ID__c;
+.output stdout
+
+Step 3: import roundsLINKrsa.csv
+.import roundsLINKrsa.csv link1
+
+Step 4: reduce and output link1 to one person per year
+.output roundsLINKrsa_recent.csv
+SELECT* FROM (
+SELECT link1.*,
+ROW_NUMBER() OVER (
+PARTITION BY Fullname
+ORDER BY Program_Year__c DESC
+) AS rn
+FROM link1)
+WHERE rn=1;
+.output stdout
+
+Step 5: import roundsLINKrsa_recent.csv
+.import roundsLINKrsa_recent.csv recent
+
+Step 6: import intake
+.import delaware_intake_May18_2026_clean.csv intake
+
+Step 7: join and output recent and intake
+.output delaware_intake_plus_rsa.csv
+SELECT* FROM recent
+JOIN intake
+ON recent.Email = intake.RecipientEmail;
+.output stdout
